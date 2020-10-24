@@ -1,0 +1,17 @@
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.el-card {
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15) !important;
+  width: 80%;
+  margin:auto;
+}
+
+.el-table {
+  margin-top: 15px;
+}
