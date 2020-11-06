@@ -4,14 +4,30 @@ body,
   margin: 0;
   padding: 0;
   height: 100%;
+  background-color: cadetblue;
 }
 
 .el-card {
   box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15) !important;
-  width: 80%;
-  margin:auto;
 }
 
 .el-table {
   margin-top: 15px;
+}
+
+.logo_container{
+	text-align: center;
+	margin-top: 30px;
+}
+
+.logo{
+	font-size: 40px;
+	color: #fafafa;
+	letter-spacing: 0;
+	text-shadow: 0px 1px 0px #999, 0px 2px 0px #888, 0px 3px 0px #777, 0px 4px 0px #666, 0px 5px 0px #555, 0px 6px 0px #444, 0px 7px 0px #333, 0px 8px 7px #001135;
+}
+
+.hs{
+	color: #fa3534;
+	font-size: 50px;
 }

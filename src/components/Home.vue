@@ -5,13 +5,16 @@
         <!-- 面包屑导航区域 -->
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/table' }"
-            v-if="this.$route.path==='/table' || this.$route.path==='/detail'">搜索结果</el-breadcrumb-item>
-          <el-breadcrumb-item :to="{ path: '/detail' }" v-if="this.$route.path==='/detail'">内容详情</el-breadcrumb-item>
+          <el-breadcrumb-item v-if="this.$route.path==='/table' || this.$route.path==='/detail'">搜索结果
+          </el-breadcrumb-item>
+          <el-breadcrumb-item v-if="this.$route.path==='/detail'">内容详情</el-breadcrumb-item>
         </el-breadcrumb>
         <!-- logo区域 -->
-        <img src="../assets/logo.png" class="home_img">
-        <p><span>HS</span>编码查询</p>
+        <div class="logo_container">
+          <span class="logo">
+            <span class="hs">HSCode</span> 搜索
+          </span>
+        </div>
       </el-header>
       <el-main>
         <el-card>
@@ -20,11 +23,11 @@
             <el-button slot="append" icon="el-icon-search" @click="getKey"></el-button>
           </el-input>
         </el-card>
-        <router-view></router-view>
+        <router-view ref="child"></router-view>
       </el-main>
     </el-container>
     <!-- 回到顶部 -->
-    <el-backtop target=".home" :visibility-height="100"></el-backtop>
+    <el-backtop target=".home" :visibility-height="150"></el-backtop>
   </div>
 </template>
 
@@ -33,9 +36,7 @@
     data() {
       return {
         // 关键词
-        key: '',
-        //控制卡片是否显示
-        showCard: false,
+        key: ''
       }
     },
     methods: {
@@ -50,6 +51,9 @@
       },
       //输入框change事件
       inputChange() {
+        if (this.$route.path === '/table') {
+          return this.$refs['child'].getListByKey(this.key)
+        }
         this.getKey()
       }
     }
@@ -57,21 +61,20 @@
 </script>
 
 <style scoped>
+  .home {
+    height: 100%;
+    overflow: auto;
+  }
+
   .el-header {
     height: 100px !important;
   }
 
-  .home {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    height: 100%;
-    width: 100%;
-    overflow: auto;
-  }
-
   .el-card {
-    margin-top: 150px;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    width: 50%;
   }
 
   .home_img {
@@ -93,5 +96,9 @@
     font-size: 35px;
     font-weight: bolder;
     color: firebrick;
+  }
+
+  .el-breadcrumb {
+    margin-top: 10px;
   }
 </style>

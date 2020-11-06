@@ -1,12 +1,15 @@
 <template>
-  <div>
+  <div class="table">
     <!-- 卡片视图区域 -->
     <el-card v-if="showCard">
       <!-- 表格区域 -->
       <el-table :data="keyList" border stripe>
         <el-table-column prop="hscode" label="商品编号">
         </el-table-column>
-        <el-table-column prop="product_name" label="商品名称">
+        <el-table-column label="商品名称">
+          <template slot-scope="scope">
+            <span v-html="showDate(scope.row.product_name)"></span>
+          </template>
         </el-table-column>
         <el-table-column prop="unit" label="计量单位">
         </el-table-column>
@@ -18,7 +21,8 @@
         </el-table-column>
         <el-table-column label="更多信息">
           <template slot-scope="scope">
-            <el-button type="primary" @click="showDetail(scope.row.hscode)" size="mini">详情</el-button>
+            <el-button type="primary" @click="showDetail(scope.row.hscode,scope.row.product_name)" size="mini">详情
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -35,6 +39,8 @@
   export default {
     data() {
       return {
+        // 关键词
+        key: '',
         //控制卡片是否显示
         showCard: false,
         // 关键词搜索列表
@@ -55,9 +61,10 @@
     },
     methods: {
       // 根据关键词获取数据列表
-      async getListByKey() {
-        this.urlKey = this.$route.query.key
-        const { data: res } = await this.$http.post(`search?keyword=${this.urlKey}`)
+      async getListByKey(key) {
+        this.key = key
+        this.urlKey = key
+        const { data: res } = await this.$http.post(`search?keyword=${key}`)
         // console.log(res)
         if (res.code !== 200) {
           return this.$message.error(`${res.data}`)
@@ -77,32 +84,48 @@
       // 分页条数改变触发事件
       handleSizeChange(newPageSize) {
         this.pageSize = newPageSize
-        this.getListByKey()
+        this.getListByKey(this.urlKey)
       },
       // 分页当前页切换触发事件
       handleCurrentChange(newPage) {
         this.currentPage = newPage
-        this.getListByKey()
+        this.getListByKey(this.urlKey)
       },
       // 点击详情跳转
-      async showDetail(hscode) {
+      showDetail(hscode, title) {
         this.$router.push({
           path: 'detail',
           query: {
-            hscode: hscode
+            hscode: hscode,
+            title: title
           }
         })
+      },
+      // 筛选变色
+      showDate(val) {
+        val = val + ''
+        const keys = this.key.split('')
+        //遍历搜索词，商品名称存在该字的话就变色
+        keys.forEach(item => {
+          if (val.indexOf(item) !== - 1 && item !== '') {
+            return val = val.replace(eval(`/${item}/g`), '<font color="#409EFF">' + item + '</font>')
+          } else {
+            return val = val
+          }
+        })
+        return val
       }
     },
     created() {
-      this.getListByKey()
-    },
-    updated() {
-      if (this.$route.query.key !== this.urlKey)
-        this.getListByKey()
+      this.getListByKey(this.$route.query.key)
     }
   }
 </script>
 
 <style scoped>
+  .el-card {
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15) !important;
+    width: 80%;
+    margin: auto;
+  }
 </style>
