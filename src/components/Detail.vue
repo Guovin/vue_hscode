@@ -4,11 +4,11 @@
     <!-- 卡片视图区 -->
     <div v-for="(list,index) in goodList" :key="index">
       <div class="container">
-        <el-row :gutter="30">
-          <el-col :span="12">
+        <el-row>
+          <el-col :span="17">
             <!-- 商品基本信息 -->
             <!-- 商品名称 -->
-            <el-card>
+            <el-card class="infoCard">
               <div class="info">基本信息</div>
               <div class="hoverColor">
                 <div class="span_right">
@@ -30,10 +30,28 @@
                   <span style="font-size: 20px;font-weight: bolder;line-height:40px;">{{list.hscode_name}}</span>
                 </div>
               </div>
-
+              <!-- 商品详情 -->
+              <div class="hoverColor">
+                <el-row type="flex" justify="space-between" class="div_detail">
+                  <el-col :span="3" class="detail_left"><span
+                      style="font-size: 15px;font-weight: bold;color: #606266;line-height:40px;">商品详情</span></el-col>
+                  <el-col :span="21" class="detail_right"><span v-if="example !== ''"
+                      style="font-size: 10px;font-weight: bolder;line-height:40px;">{{example}}</span>
+                    <span v-else style="font-size: 18px;font-weight: bolder;color: #909399;">无</span>
+                  </el-col>
+                </el-row>
+              </div>
             </el-card>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="7">
+            <el-card class="myApp">
+              <div>HSCode搜索微信小程序-扫码使用</div>
+              <img src="../assets/code.jpg" alt="小程序码" style="width: 160px;height: 160px;">
+            </el-card>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="16">
             <!-- 计量单位 -->
             <el-card>
               <div class="info">计量单位</div>
@@ -70,8 +88,8 @@
         </el-row>
       </div>
       <div class="container">
-        <el-row :gutter="30">
-          <el-col :span="12">
+        <el-row>
+          <el-col :span="16">
             <!-- 税率信息 -->
             <el-card>
               <div class="info">税率信息</div>
@@ -113,7 +131,9 @@
               </div>
             </el-card>
           </el-col>
-          <el-col :span="12">
+        </el-row>
+        <el-row>
+          <el-col :span="16">
             <!-- 监管条件 -->
             <el-card>
               <div class="info"><span>监管条件</span><span class="subTitle">{{list.regulatory_code}}</span></div>
@@ -129,8 +149,8 @@
         </el-row>
       </div>
       <div class="container">
-        <el-row :gutter="30">
-          <el-col :span="12">
+        <el-row>
+          <el-col :span="16">
             <!-- 检验检疫类别 -->
             <el-card>
               <div class="info"><span>检验检疫类别</span><span class="subTitle">{{list.ciq_code}}</span></div>
@@ -143,7 +163,9 @@
               </div>
             </el-card>
           </el-col>
-          <el-col :span="12">
+        </el-row>
+        <el-row>
+          <el-col :span="16">
             <!-- 申报条件 -->
             <el-card>
               <div class="info">申报要素</div>
@@ -151,8 +173,10 @@
                 <span style="font-size: 18px;color: #909399;" v-if="list.element_require === '' ">暂无</span>
                 <div v-else v-for="(item,i) in elementList" :key="i">
                   <el-row>
-                    <el-col :span="2"><span style="font-size: 18px;color: #909399;">{{i+1}}</span></el-col>
-                    <el-col :span="22"><span style="font-size: 18px;font-weight: bold;color: #606266;">{{item}}</span>
+                    <el-col :span="2"><span style="font-size: 18px;color: #909399;">{{i+1}}</span>
+                    </el-col>
+                    <el-col :span="22" class="detail_right"><span
+                        style="font-size: 18px;font-weight: bold;color: #606266;">{{item}}</span>
                     </el-col>
                   </el-row>
                 </div>
@@ -182,7 +206,9 @@
         //检疫条件名称列表
         ciqName: [],
         //检疫条件详情列表
-        ciqDetail: []
+        ciqDetail: [],
+        //商品详情
+        example: ''
       }
     },
     methods: {
@@ -263,6 +289,7 @@
     created() {
       this.getListByHsCode()
       this.title = this.$route.query.title
+      this.example = this.$route.query.example
     }
   }
 </script>
@@ -280,12 +307,12 @@
     margin-bottom: 20px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .el-row .el-card {
-    min-width: 100%;
+    min-width: 94%;
     height: 100%;
-    margin-right: 20px;
     transition: all .5s;
   }
 
@@ -307,5 +334,35 @@
 
   .hoverColor :hover {
     background-color: gainsboro;
+  }
+
+
+  .div_detail {
+    border-radius: 4px;
+  }
+
+
+  .detail_left {
+    border-radius: 4px;
+  }
+
+  .detail_right {
+    border-radius: 4px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .infoCard {
+    margin-left: 23.5%;
+  }
+
+  .myApp {
+    text-align: center;
+    font-size: 14px;
+    margin-left: 50%;
+  }
+
+  .myApp img {
+    margin-top: 30px;
   }
 </style>

@@ -4,33 +4,38 @@
     <el-card v-if="showCard">
       <!-- 表格区域 -->
       <el-table :data="keyList" border stripe>
-        <el-table-column prop="hscode" label="商品编号">
+        <el-table-column prop="hscode" label="商品编号" header-align="center" align="center">
         </el-table-column>
-        <el-table-column label="商品名称">
+        <el-table-column label="商品名称" header-align="center" align="center">
           <template slot-scope="scope">
             <span v-html="showDate(scope.row.product_name)"></span>
           </template>
         </el-table-column>
-        <el-table-column prop="unit" label="计量单位">
+        <el-table-column prop="hscode_name" label="商品分类" header-align="center" align="center">
         </el-table-column>
-        <el-table-column prop="export_retax" label="出口退税率(%)">
+        <el-table-column prop="unit" label="计量单位" header-align="center" align="center">
         </el-table-column>
-        <el-table-column prop="supervision_code" label="监管条件">
+        <el-table-column prop="export_retax" label="出口退税率(%)" header-align="center" align="center">
         </el-table-column>
-        <el-table-column prop="ciq_code" label="检验检疫">
+        <el-table-column prop="supervision_code" label="监管条件" header-align="center" align="center">
         </el-table-column>
-        <el-table-column label="更多信息">
+        <el-table-column prop="ciq_code" label="检验检疫" header-align="center" align="center">
+        </el-table-column>
+        <el-table-column label="更多信息" header-align="center" align="center">
           <template slot-scope="scope">
-            <el-button type="primary" @click="showDetail(scope.row.hscode,scope.row.product_name)" size="mini">详情
+            <el-button type="primary"
+              @click="showDetail(scope.row.hscode,scope.row.product_name,scope.row.element_example)" size="mini">详情
             </el-button>
           </template>
         </el-table-column>
       </el-table>
       <!-- 分页功能区域 -->
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
-        :page-sizes="[5, 7, 10]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total"
-        background>
-      </el-pagination>
+      <nav class="page">
+        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
+          :page-sizes="[5, 7, 10]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total"
+          background>
+        </el-pagination>
+      </nav>
     </el-card>
   </div>
 </template>
@@ -54,7 +59,7 @@
         // 当前页码数
         currentPage: 1,
         // 当前页显示数据条数
-        pageSize: 5,
+        pageSize: 10,
         //url
         urlKey: ''
       }
@@ -92,12 +97,13 @@
         this.getListByKey(this.urlKey)
       },
       // 点击详情跳转
-      showDetail(hscode, title) {
+      showDetail(hscode, title, example) {
         this.$router.push({
           path: 'detail',
           query: {
             hscode: hscode,
-            title: title
+            title: title,
+            example: example
           }
         })
       },
@@ -127,5 +133,9 @@
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15) !important;
     width: 80%;
     margin: auto;
+  }
+
+  .page {
+    text-align: center;
   }
 </style>

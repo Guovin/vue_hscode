@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import 'element-ui/lib/theme-chalk/index.css'
-import { Container, Header, Main, Input, Message, Table, TableColumn, Card, Button, Pagination, Dialog, Breadcrumb, BreadcrumbItem, Backtop, Icon, Row, Col } from 'element-ui'
+import { Container, Header, Main, Input, Message, Table, TableColumn, Card, Button, Pagination, Dialog, Breadcrumb, BreadcrumbItem, Backtop, Icon, Row, Col, Footer, Drawer } from 'element-ui'
 
 Vue.use(Container)
 Vue.use(Header)
@@ -18,5 +18,7 @@ Vue.use(Backtop)
 Vue.use(Icon)
 Vue.use(Row)
 Vue.use(Col)
+Vue.use(Footer)
+Vue.use(Drawer)
 
 Vue.prototype.$message = Message
