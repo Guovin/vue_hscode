@@ -4,20 +4,20 @@
       <el-header>
         <!-- 面包屑导航区域 -->
         <el-breadcrumb separator-class="el-icon-arrow-right">
-          <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item v-if="this.$route.path==='/table' || this.$route.path==='/detail'">搜索结果
           </el-breadcrumb-item>
           <el-breadcrumb-item v-if="this.$route.path==='/detail'">内容详情</el-breadcrumb-item>
         </el-breadcrumb>
         <!-- logo区域 -->
         <div class="logo_container">
-          <span class="logo">
-            <span class="hs">HSCode</span> 搜索
+          <span class="logo" @click="goHome">
+            <span class="hs">HS</span>Code
           </span>
         </div>
       </el-header>
       <el-main>
-        <el-card>
+        <el-card class="searchCard">
           <!-- 搜索区域 -->
           <el-input placeholder="请输入商品名称或商品编码" v-model="key" @change="inputChange" clearable>
             <el-button slot="append" icon="el-icon-search" @click="getKey"></el-button>
@@ -78,6 +78,12 @@
       //网站声明抽屉
       handleClose(done) {
         done()
+      },
+      //返回首页
+      goHome() {
+        if (this.$route.path !== '/') {
+          return this.$router.push('/')
+        }
       }
     },
   }
@@ -99,21 +105,7 @@
     margin: auto;
     margin-top: 50px;
     margin-bottom: 30px;
-    width: 53.2%;
-  }
-
-  .el-header p {
-    text-align: center;
-    font-size: 35px;
-    font-weight: bolder;
-    color: darkcyan;
-  }
-
-  .el-header p span {
-    text-align: center;
-    font-size: 35px;
-    font-weight: bolder;
-    color: firebrick;
+    width: 50%;
   }
 
   .el-breadcrumb {
@@ -124,7 +116,7 @@
     width: 100%;
     text-align: center;
     font-size: 14px;
-    background-color: darkslategray;
+    background-color: #1F2939;
     height: 30px;
     line-height: 30px;
   }
@@ -136,5 +128,10 @@
   .el-drawer div {
     font-size: 10px;
     margin-left: 10px;
+  }
+
+  .searchCard {
+    background-color: rgba(255, 255, 255, 0.01);
+    border: rgba(255, 255, 255, 0.01)
   }
 </style>

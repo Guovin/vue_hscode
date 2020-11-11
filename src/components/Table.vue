@@ -1,9 +1,9 @@
 <template>
   <div class="table">
     <!-- 卡片视图区域 -->
-    <el-card v-if="showCard">
+    <el-card v-if="showCard" class="tableCard">
       <!-- 表格区域 -->
-      <el-table :data="keyList" border stripe>
+      <el-table :data="keyList" border stripe class="outTable">
         <el-table-column prop="hscode" label="商品编号" header-align="center" align="center">
         </el-table-column>
         <el-table-column label="商品名称" header-align="center" align="center">
@@ -137,5 +137,21 @@
 
   .page {
     text-align: center;
+  }
+
+  .tableCard {
+    background-color: rgba(255, 255, 255, 0.01);
+    border: rgba(255, 255, 255, 0.01)
+  }
+
+  .outTable {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .el-pagination {
+    background-color: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
 </style>

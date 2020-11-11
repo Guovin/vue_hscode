@@ -5,7 +5,7 @@
     <div v-for="(list,index) in goodList" :key="index">
       <div class="container">
         <el-row>
-          <el-col :span="17">
+          <el-col :span="12" :offset="6">
             <!-- 商品基本信息 -->
             <!-- 商品名称 -->
             <el-card class="infoCard">
@@ -30,20 +30,9 @@
                   <span style="font-size: 20px;font-weight: bolder;line-height:40px;">{{list.hscode_name}}</span>
                 </div>
               </div>
-              <!-- 商品详情 -->
-              <div class="hoverColor">
-                <el-row type="flex" justify="space-between" class="div_detail">
-                  <el-col :span="3" class="detail_left"><span
-                      style="font-size: 15px;font-weight: bold;color: #606266;line-height:40px;">商品详情</span></el-col>
-                  <el-col :span="21" class="detail_right"><span v-if="example !== ''"
-                      style="font-size: 10px;font-weight: bolder;line-height:40px;">{{example}}</span>
-                    <span v-else style="font-size: 18px;font-weight: bolder;color: #909399;">无</span>
-                  </el-col>
-                </el-row>
-              </div>
             </el-card>
           </el-col>
-          <el-col :span="7">
+          <el-col :span="5" :offset="1">
             <el-card class="myApp">
               <div>HSCode搜索微信小程序-扫码使用</div>
               <img src="../assets/code.jpg" alt="小程序码" style="width: 160px;height: 160px;">
@@ -51,7 +40,7 @@
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="16">
+          <el-col :span="12">
             <!-- 计量单位 -->
             <el-card>
               <div class="info">计量单位</div>
@@ -89,7 +78,7 @@
       </div>
       <div class="container">
         <el-row>
-          <el-col :span="16">
+          <el-col :span="12">
             <!-- 税率信息 -->
             <el-card>
               <div class="info">税率信息</div>
@@ -133,7 +122,7 @@
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="16">
+          <el-col :span="12">
             <!-- 监管条件 -->
             <el-card>
               <div class="info"><span>监管条件</span><span class="subTitle">{{list.regulatory_code}}</span></div>
@@ -150,7 +139,7 @@
       </div>
       <div class="container">
         <el-row>
-          <el-col :span="16">
+          <el-col :span="12">
             <!-- 检验检疫类别 -->
             <el-card>
               <div class="info"><span>检验检疫类别</span><span class="subTitle">{{list.ciq_code}}</span></div>
@@ -165,7 +154,7 @@
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="16">
+          <el-col :span="12">
             <!-- 申报条件 -->
             <el-card>
               <div class="info">申报要素</div>
@@ -177,6 +166,18 @@
                     </el-col>
                     <el-col :span="22" class="detail_right"><span
                         style="font-size: 18px;font-weight: bold;color: #606266;">{{item}}</span>
+                    </el-col>
+                  </el-row>
+                </div>
+                <!-- 申报要素样例 -->
+                <div class="hoverColor">
+                  <el-row type="flex" justify="space-between" class="div_detail">
+                    <el-col :span="4" class="detail_left"><span
+                        style="font-size: 15px;font-weight: bold;color: #606266;line-height:40px;">申报要素样例</span>
+                    </el-col>
+                    <el-col :span="20" class="detail_right"><span v-if="example !== ''"
+                        style="font-size: 10px;font-weight: bolder;line-height:40px;">{{example}}</span>
+                      <span v-else style="font-size: 18px;font-weight: bolder;color: #909399;">无</span>
                     </el-col>
                   </el-row>
                 </div>
@@ -207,7 +208,7 @@
         ciqName: [],
         //检疫条件详情列表
         ciqDetail: [],
-        //商品详情
+        //申报要素样例
         example: ''
       }
     },
@@ -311,13 +312,12 @@
   }
 
   .el-row .el-card {
-    min-width: 94%;
     height: 100%;
     transition: all .5s;
   }
 
   .container {
-    width: 80%;
+    width: 100%;
     margin: auto;
   }
 
@@ -353,13 +353,13 @@
   }
 
   .infoCard {
-    margin-left: 23.5%;
+    /* margin-left: 23.5%; */
   }
 
   .myApp {
     text-align: center;
     font-size: 14px;
-    margin-left: 50%;
+    /* margin-left: 50%; */
   }
 
   .myApp img {
