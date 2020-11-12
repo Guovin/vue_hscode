@@ -352,14 +352,9 @@
     justify-content: flex-end;
   }
 
-  .infoCard {
-    /* margin-left: 23.5%; */
-  }
-
   .myApp {
     text-align: center;
     font-size: 14px;
-    /* margin-left: 50%; */
   }
 
   .myApp img {
